@@ -5,18 +5,40 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style TargetType="RadioButton">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Grid>
+                        <Grid Background="Transparent">
+                            <Border x:Name="border_back"/>
+                            <Border x:Name="border_thick" Margin="5 10 5 10"/>
                             <ContentPresenter/>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#F0F6F6" TargetName="border_back"/>
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="Red" />
+                                <Setter Property="FontWeight" Value="Bold"/>
+
+                                <Setter Property="Background" Value="Red" TargetName="border_back"/>
+                                <Setter Property="Opacity" Value="0.05" TargetName="border_back"/>
+
+                                <Setter Property="BorderThickness" Value="2 0 0 0" TargetName="border_thick"/>
+                                <Setter Property="BorderBrush" Value="Red" TargetName="border_thick"/>
+
+                            </Trigger>
+                            
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <Style x:Key="iconTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="FontFamily" Value="./Fonts/#iconfont"/>
         </Style>
