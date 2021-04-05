@@ -1,91 +1,87 @@
-﻿<Window x:Class="MicrosoftToDO.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MicrosoftToDO"
-        mc:Ignorable="d" Height="650" Width="1000">
+﻿<Window
+    x:Class="MicrosoftToDO.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MicrosoftToDO"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:MicrosoftToDO.ViewModels"
+    Width="1000"
+    Height="650"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <viewmodels:MainViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <DockPanel LastChildFill="True">
 
-            <TextBlock Text="Microsoft ToDo" Margin="10 10 0 20" DockPanel.Dock="Top"/>
+            <TextBlock
+                Margin="10,10,0,20"
+                DockPanel.Dock="Top"
+                Text="Microsoft ToDo" />
 
             <DockPanel DockPanel.Dock="Top" LastChildFill="False">
-                <Image Source="logo.jpg" Width="30" Height="30" Margin="10 0 0 0"/>
-                <TextBlock Text="henji" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                <Image
+                    Width="30"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    Source="logo.jpg" />
+                <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="henji" />
 
-                <TextBlock Text="&#xe645;" FontFamily="./Fonts/#iconfont" Margin="0 0 10 0" FontSize="22"
-                           DockPanel.Dock="Right" VerticalAlignment="Center"/>
+                <TextBlock
+                    Margin="0,0,10,0"
+                    VerticalAlignment="Center"
+                    DockPanel.Dock="Right"
+                    FontFamily="./Fonts/#iconfont"
+                    FontSize="22"
+                    Text="&#xe645;" />
             </DockPanel>
 
-            <ListBox BorderThickness="0">
+            <ListBox BorderThickness="0" ItemsSource="{Binding MenuItems}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="Height" Value="45"/>
-                        <Setter Property="Margin" Value="0 3 0 0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="Height" Value="45" />
+                        <Setter Property="Margin" Value="0,3,0,0" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                    <ContentPresenter/>
+                                    <ContentPresenter />
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
                     </Style>
                 </ListBox.ItemContainerStyle>
-                
-                <RadioButton>
-                    <DockPanel LastChildFill="False" Margin="10 0 0 0">
-                        <TextBlock Text="&#xe635;" Style="{StaticResource iconTextBlockStyle}"/>
-                        <TextBlock Text="我的一天" Margin="10 0 0 0" VerticalAlignment="Center"/>
-                        <TextBlock Text="1" DockPanel.Dock="Right" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                    </DockPanel>
-                </RadioButton>
 
-                <RadioButton>
-                    <DockPanel LastChildFill="False" Margin="10 0 0 0">
-                        <TextBlock Text="&#xe6b6;" Style="{StaticResource iconTextBlockStyle}"/>
-                        <TextBlock Text="重要" Margin="10 0 0 0" VerticalAlignment="Center"/>
-                        <TextBlock Text="1" DockPanel.Dock="Right" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                    </DockPanel>
-                </RadioButton>
-
-                <RadioButton>
-                    <DockPanel LastChildFill="False" Margin="10 0 0 0">
-                        <TextBlock Text="&#xe6e1;" Style="{StaticResource iconTextBlockStyle}"/>
-                        <TextBlock Text="已计划日程" Margin="10 0 0 0" VerticalAlignment="Center"/>
-                        <TextBlock Text="1" DockPanel.Dock="Right" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                    </DockPanel>
-                </RadioButton>
-
-                <RadioButton>
-                    <DockPanel LastChildFill="False" Margin="10 0 0 0">
-                        <TextBlock Text="&#xe614;" Style="{StaticResource iconTextBlockStyle}"/>
-                        <TextBlock Text="已分配给你" Margin="10 0 0 0" VerticalAlignment="Center"/>
-                        <TextBlock Text="1" DockPanel.Dock="Right" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                    </DockPanel>
-                </RadioButton>
-
-                <RadioButton>
-                    <DockPanel LastChildFill="False" Margin="10 0 0 0">
-                        <TextBlock Text="&#xe755;" Style="{StaticResource iconTextBlockStyle}"/>
-                        <TextBlock Text="任务" Margin="10 0 0 0" VerticalAlignment="Center"/>
-                        <TextBlock Text="1" DockPanel.Dock="Right" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                    </DockPanel>
-                </RadioButton>
-
-
-
+                <!--  listbox的子项数据模板  -->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel Margin="10,0,0,0" LastChildFill="False">
+                            <TextBlock Style="{StaticResource iconTextBlockStyle}" Text="{Binding Icon}" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Text="{Binding Name}" />
+                            <TextBlock
+                                Margin="0,0,10,0"
+                                VerticalAlignment="Center"
+                                DockPanel.Dock="Right"
+                                Text="{Binding Count}" />
+                        </DockPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
-
         </DockPanel>
 
-        <Border Background="Green" Grid.Column="1"/>
+        <Border Grid.Column="1" Background="Green" />
 
     </Grid>
 </Window>
