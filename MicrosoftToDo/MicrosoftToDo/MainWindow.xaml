@@ -14,7 +14,7 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="210" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
@@ -23,9 +23,14 @@
             <TextBlock
                 Margin="10,10,0,20"
                 DockPanel.Dock="Top"
-                Text="Microsoft ToDo" />
+                FontSize="12"
+                Foreground="#FF737373"
+                Text="Microsoft To Do" />
 
-            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+            <DockPanel
+                Margin="0,10"
+                DockPanel.Dock="Top"
+                LastChildFill="False">
                 <Image
                     Width="30"
                     Height="30"
@@ -50,11 +55,29 @@
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         <Setter Property="Height" Value="45" />
-                        <Setter Property="Margin" Value="0,3,0,0" />
+                        <Setter Property="Margin" Value="0,2,0,0" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                    <ContentPresenter />
+                                    <Grid>
+                                        <Border x:Name="bd1" />
+                                        <Border x:Name="bd2" Margin="5,8" />
+                                        <ContentPresenter />
+                                    </Grid>
+
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="bd1" Property="Background" Value="#FFF5F4F4" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                            <Setter Property="Foreground" Value="{Binding BackColor}" />
+                                            <Setter TargetName="bd1" Property="Opacity" Value="0.1" />
+                                            <Setter TargetName="bd1" Property="Background" Value="{Binding BackColor}" />
+                                            <Setter TargetName="bd2" Property="BorderThickness" Value="2,0,0,0" />
+                                            <Setter TargetName="bd2" Property="BorderBrush" Value="{Binding BackColor}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -69,11 +92,13 @@
                             <TextBlock
                                 Margin="10,0,0,0"
                                 VerticalAlignment="Center"
+                                FontSize="14"
                                 Text="{Binding Name}" />
                             <TextBlock
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
                                 DockPanel.Dock="Right"
+                                FontWeight="Light"
                                 Text="{Binding Count}" />
                         </DockPanel>
                     </DataTemplate>
