@@ -76,6 +76,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\MenuItem.cs" />
+    <Compile Include="Models\TaskInfo.cs" />
+    <Compile Include="Models\TaskItem.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -1,10 +1,14 @@
 ﻿using MicrosoftToDO.Common;
+using Prism.Commands;
+using Prism.Mvvm;
+using System;
 using System.Collections.ObjectModel;
 
 namespace MicrosoftToDO.ViewModels
 {
     public class MainViewModel
     {
+
         private ObservableCollection<MenuItem> menuItems;
 
         public ObservableCollection<MenuItem> MenuItems
@@ -22,5 +26,6 @@ namespace MicrosoftToDO.ViewModels
             MenuItems.Add(new MenuItem() { Icon = "\xe614", BackColor = "#FFAC395D", Name = "已分配给你", Count = 2 });
             MenuItems.Add(new MenuItem() { Icon = "\xe755", BackColor = "#FF3E8E6C", Name = "任务", Count = 2 });
         }
+
     }
 }
